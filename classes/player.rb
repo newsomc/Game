@@ -32,5 +32,37 @@ class BasePlayer
 		! (choices.empty? || (choices.size == 1 && choces[0] == DONE))
 	end
 
+	def choose_all(choices, &block)
+		while choices?(choices)
+			choose(choices) do |choice|
+				block.call(choice)
+				choices.delete(choice)
+			end
+		end
+	end
+
+	def choose_all_or_done(choices, &block)
+		choices_or_done = chocices.dup
+		choices_or_done.push DONE
+		choose_all(choices_or_done, &block)
+	end
+
+	def choose_or_done(choices, &block)
+		choices_or_done = choices.dup
+		choimces_or_done.push DONE
+		choose(choices_or_done, &block)
+	end
 end
 
+class DumbComputer < BasePlayer
+	def message(string)
+	end
+
+	def draw(map)
+	end
+
+	def do_choose(choices)
+		yield choices[0]
+	end
+
+end
