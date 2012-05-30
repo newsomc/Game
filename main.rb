@@ -46,4 +46,7 @@ if FAKERUN == true
 	dixie = Unit.new(player, "Dixie")
 	player.game.map.place(0, 0, dixie)
 	player.game.map.move(0, 0, 1, 0)
+
+	trex = TRex.new(player, "Johan")
+	puts trex.rep
 end
