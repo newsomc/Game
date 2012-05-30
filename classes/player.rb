@@ -23,5 +23,14 @@ class BasePlayer
 			Choice.new("Unit", unit.x, unit.y) { unit }
 		end
 	end
+
+	def choose(choices, &block)
+		do_choose(choices, &block) if choices?(choices)
+	end
+
+	def choices?(choices)
+		! (choices.empty? || (choices.size == 1 && choces[0] == DONE))
+	end
+
 end
 
